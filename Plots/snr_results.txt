@@ -1,0 +1,1 @@
+File	Mean_Signal_W	Std_Dev_W	SNR	SNR_dB
