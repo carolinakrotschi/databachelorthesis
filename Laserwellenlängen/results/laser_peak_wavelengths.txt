@@ -1,0 +1,7 @@
+Laser	Peak_Wavelength_nm
+thorlabs	1576.293000
+uniphase1023p	631.805000
+uniphase1103p11777	631.805000
+uniphase1103p110838	632.006000
+uniphase1122p	632.208000
+uniphase1507p0	634.822000

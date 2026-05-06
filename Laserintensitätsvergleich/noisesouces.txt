@@ -1,0 +1,2 @@
+laser fluctuations optische Leistung/Intensität (Anzahl der Photonen, die der Laser emittiert ist nicht konstant)
+Umgebungsvibrationen von optischem Tisch etc.
