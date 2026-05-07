@@ -1,0 +1,2 @@
+Laser	Wavelength_nm	w0_x_mm	z0_x_mm	M2_x	w0_y_mm	z0_y_mm	M2_y
+thorlabs	1576.293000	0.043420	19.081681	1.751385	0.029005	18.550122	0.570662

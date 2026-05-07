@@ -6,13 +6,14 @@ import matplotlib.pyplot as plt
 # FOLDERS
 # ============================================================
 
-DATA_DIR = Path("rawdata")
-OUTPUT_DIR = Path("results")
+DATA_DIR = Path("Laserwellenlänge/rawdata")
+OUTPUT_DIR = Path("Laserwellenlänge/results")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # ============================================================
 # FILE PAIRS
 # signal file, background file
+# both files are inside the folder "rawdata"
 # ============================================================
 
 FILE_PAIRS = [
@@ -51,8 +52,8 @@ def read_spectrum(file_path):
     intensities = []
     reading_data = False
 
-    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
-        for line in f:
+    with open(file_path, "r", encoding="utf-8", errors="ignore") as file:
+        for line in file:
             line = line.strip()
 
             if "Begin Spectral Data" in line:
@@ -92,6 +93,8 @@ for signal_file, background_file in FILE_PAIRS:
     background_path = DATA_DIR / background_file
 
     print(f"\nProcessing: {name}")
+    print(f"Signal file: {signal_path}")
+    print(f"Background file: {background_path}")
 
     if not signal_path.exists():
         print(f"ERROR: Signal file not found: {signal_path}")
@@ -104,6 +107,10 @@ for signal_file, background_file in FILE_PAIRS:
     wl_signal, intensity_signal = read_spectrum(signal_path)
     wl_background, intensity_background = read_spectrum(background_path)
 
+    if len(wl_signal) == 0 or len(wl_background) == 0:
+        print(f"ERROR: No spectral data found for {name}.")
+        continue
+
     if len(wl_signal) != len(wl_background):
         print(f"ERROR: Spectrum lengths do not match for {name}.")
         continue
@@ -112,28 +119,32 @@ for signal_file, background_file in FILE_PAIRS:
         print(f"ERROR: Wavelength axes do not match for {name}.")
         continue
 
+    # Background subtraction
     intensity = intensity_signal - intensity_background
-    intensity[intensity < 0] = 0
 
     peak_index = np.argmax(intensity)
     peak_wavelength = wl_signal[peak_index]
     peak_intensity = intensity[peak_index]
 
+    print(f"Min intensity: {np.min(intensity):.3f}")
+    print(f"Max intensity: {np.max(intensity):.3f}")
     print(f"Peak wavelength: {peak_wavelength:.3f} nm")
 
     peak_results.append((name, peak_wavelength))
     all_corrected_spectra.append((name, wl_signal, intensity))
 
-    # --------------------------------------------------------
-    # Individual plot
-    # --------------------------------------------------------
+    # ========================================================
+    # INDIVIDUAL PLOT
+    # ========================================================
 
     plt.figure(figsize=(10, 6))
     plt.plot(wl_signal, intensity)
 
+    text_y_position = np.min(intensity) + 0.55 * (np.max(intensity) - np.min(intensity))
+
     plt.text(
         peak_wavelength,
-        peak_intensity * 0.5,
+        text_y_position,
         f"{peak_wavelength:.3f} nm",
         horizontalalignment="center",
         verticalalignment="center"
@@ -152,11 +163,11 @@ for signal_file, background_file in FILE_PAIRS:
 # SAVE TXT FILE
 # ============================================================
 
-with open(OUTPUT_DIR / "laser_peak_wavelengths.txt", "w", encoding="utf-8") as f:
-    f.write("Laser\tPeak_Wavelength_nm\n")
+with open(OUTPUT_DIR / "laser_peak_wavelengths.txt", "w", encoding="utf-8") as file:
+    file.write("Laser\tPeak_Wavelength_nm\n")
 
     for name, peak_wavelength in peak_results:
-        f.write(f"{name}\t{peak_wavelength:.6f}\n")
+        file.write(f"{name}\t{peak_wavelength:.6f}\n")
 
 
 # ============================================================
@@ -178,4 +189,4 @@ plt.savefig(OUTPUT_DIR / "all_corrected_lasers.png", dpi=300)
 plt.show()
 
 print("\nFinished.")
-print(f"Results saved in: {OUTPUT_DIR}")
+print(f"Results saved in: {OUTPUT_DIR.resolve()}")
