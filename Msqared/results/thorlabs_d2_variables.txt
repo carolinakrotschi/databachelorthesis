@@ -1,0 +1,2 @@
+wavelength_nm	v_dnewd2	v_znewd2	v_thetanewd2	v_M2newd2	v_zrnewd2
+1576.293000	2.900489e-05	1.855012e-02	9.871777e-03	1.426657e-01	2.938163e-03
