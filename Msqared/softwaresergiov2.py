@@ -3,9 +3,7 @@ import numpy as np
 import laserbeamsize as lbs
 import matplotlib.pyplot as plt
 
-# ============================================================
-# FOLDERS
-# ============================================================
+
 
 BASE_DIR = Path(
     "/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/"
@@ -16,10 +14,6 @@ DATA_DIR = BASE_DIR / "rawdata"
 RESULTS_DIR = BASE_DIR / "results"
 RESULTS_DIR.mkdir(exist_ok=True)
 
-# ============================================================
-# FILES AND WAVELENGTHS
-# filename, laser name, wavelength in nm
-# ============================================================
 
 DATA_FILES = [
     ("thorlabs.txt", "thorlabs", 1576.293000),
@@ -30,9 +24,6 @@ DATA_FILES = [
     ("uniphase_1507p.txt", "uniphase1507p0", 634.822000),
 ]
 
-# ============================================================
-# FUNCTIONS
-# ============================================================
 
 def read_txt_data(file_path):
     rows = []
@@ -187,9 +178,7 @@ def analyze_file(file_path, laser_name, wavelength_nm):
     }
 
 
-# ============================================================
-# PROCESS FILES ONE BY ONE
-# ============================================================
+
 
 summary_results = []
 
@@ -206,9 +195,6 @@ for filename, laser_name, wavelength_nm in DATA_FILES:
     except Exception as e:
         print(f"\nError processing {filename}: {e}")
 
-# ============================================================
-# SAVE SUMMARY
-# ============================================================
 
 with open(RESULTS_DIR / "summary_M2_results.txt", "w") as f:
     f.write(
