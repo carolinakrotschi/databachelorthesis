@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 # FOLDERS
 # ============================================================
 
-DATA_DIR = Path("Laserwellenlänge/rawdata")
-OUTPUT_DIR = Path("Laserwellenlänge/results")
+DATA_DIR = Path("rawdata")
+OUTPUT_DIR = Path("results")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # ============================================================
