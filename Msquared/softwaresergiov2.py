@@ -16,12 +16,12 @@ RESULTS_DIR.mkdir(exist_ok=True)
 
 
 DATA_FILES = [
-    ("thorlabs.txt", "thorlabs", 1576.293000),
-    ("uniphase_1023p.txt", "uniphase1023p", 631.805000),
-    ("uniphase_1103p_1177761.txt", "uniphase1103p11777", 631.805000),
-    ("uniphase_1103p1180380.txt", "uniphase1103p110838", 632.006000),
-    ("uniphase_1122p.txt", "uniphase1122p", 632.208000),
-    ("uniphase_1507p_v3.txt", "uniphase1507p0_v3", 634.822000),
+    ("thorlabs_v2.txt", "thorlabs", 1576.293000),
+    ("uniphase_1023p_v2.txt", "uniphase1023p", 631.805000),
+    ("uniphase_1103p_1177761_v2.txt", "uniphase1103p11777", 631.805000),
+    ("uniphase_1103p1180380_v2.txt", "uniphase1103p110838", 632.006000),
+    ("uniphase_1122p_v2.txt", "uniphase1122p", 632.208000),
+    ("uniphase_1507p.txt", "uniphase1507p0", 634.822000),
 ]
 
 
@@ -67,8 +67,8 @@ def read_txt_data(file_path):
     data = data[np.argsort(data[:, 0])]
 
     z1_all = data[:, 0] * 1e-3
-    d1_all = data[:, 1] * 1e-3 / 2
-    d2_all = data[:, 2] * 1e-3 / 2
+    d1_all = data[:, 1] * 1e-3 
+    d2_all = data[:, 2] * 1e-3
 
     return z1_all, d1_all, d2_all
 

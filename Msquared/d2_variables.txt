@@ -1,2 +1,0 @@
-v_dnewd2	v_znewd2	v_thetanewd2	v_M2newd2	v_zrnewd2
-5.908973e-05	1.494536e-02	6.530563e-03	4.795516e-01	9.048183e-03
