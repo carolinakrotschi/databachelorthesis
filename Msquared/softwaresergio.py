@@ -14,14 +14,14 @@ def read_txt_data(file_path):
     return z1_all, d1_all, d2_all
 
 # Files paths
-file_path = r"/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msqared/rawdata/Thorlabs.txt"
-file_path_save = r'/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msqared/rawdata'
+file_path = r"/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msquared/rawdata/uniphase_1507p_v3.txt"
+file_path_save = r'/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msquared/rawdata'
 
 # Calling function to read the file
 z1_all, d1_all, d2_all = read_txt_data(file_path)
 
 # Central wavelength
-lambda1 = 1750e-9
+lambda1 = 632e-9
 
 # Getting values of M2 for both axis 
 lbs.M2_radius_plot(z1_all, d1_all, lambda1, strict=True)

@@ -21,7 +21,7 @@ DATA_FILES = [
     ("uniphase_1103p_1177761.txt", "uniphase1103p11777", 631.805000),
     ("uniphase_1103p1180380.txt", "uniphase1103p110838", 632.006000),
     ("uniphase_1122p.txt", "uniphase1122p", 632.208000),
-    ("uniphase_1507p.txt", "uniphase1507p0", 634.822000),
+    ("uniphase_1507p_v3.txt", "uniphase1507p0_v3", 634.822000),
 ]
 
 
