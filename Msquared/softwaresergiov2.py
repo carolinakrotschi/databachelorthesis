@@ -16,12 +16,12 @@ RESULTS_DIR.mkdir(exist_ok=True)
 
 
 DATA_FILES = [
-    ("thorlabs_v2.txt", "thorlabs", 1576.293000),
-    ("uniphase_1023p_v2.txt", "uniphase1023p", 631.805000),
-    ("uniphase_1103p_1177761_v2.txt", "uniphase1103p11777", 631.805000),
-    ("uniphase_1103p1180380_v2.txt", "uniphase1103p110838", 632.006000),
-    ("uniphase_1122p_v2.txt", "uniphase1122p", 632.208000),
-    ("uniphase_1507p.txt", "uniphase1507p0", 634.822000),
+    ("thorlabs_v4.txt", "thorlabs", 1576.293000),
+    ("uniphase_1023p_v4.txt", "uniphase1023p", 631.805000),
+    ("uniphase_1103p_1177761_v4.txt", "uniphase1103p11777", 631.805000),
+    ("uniphase_1103p_1180380_v4.txt", "uniphase1103p110838", 632.006000),
+    ("uniphase_1122p_v4.txt", "uniphase1122p", 632.208000),
+    ("uniphase_1507p_v4.txt", "uniphase1507p0", 634.822000),
 ]
 
 
@@ -84,16 +84,16 @@ def analyze_file(file_path, laser_name, wavelength_nm):
 
     print(f"Loaded points: {len(z1_all)}")
 
-    lbs.M2_radius_plot(z1_all, d1_all, wavelength_m, strict=False)
+    lbs.M2_radius_plot(z1_all, d1_all, wavelength_m, strict=True)
     plt.savefig(RESULTS_DIR / f"{laser_name}_d1_M2_plot.png", dpi=300)
     plt.close()
 
-    lbs.M2_radius_plot(z1_all, d2_all, wavelength_m, strict=False)
+    lbs.M2_radius_plot(z1_all, d2_all, wavelength_m, strict=True)
     plt.savefig(RESULTS_DIR / f"{laser_name}_d2_M2_plot.png", dpi=300)
     plt.close()
 
-    t_valueM2d1 = lbs.M2_fit(z1_all, d1_all, wavelength_m, strict=False)
-    t_valueM2d2 = lbs.M2_fit(z1_all, d2_all, wavelength_m, strict=False)
+    t_valueM2d1 = lbs.M2_fit(z1_all, d1_all, wavelength_m, strict=True)
+    t_valueM2d2 = lbs.M2_fit(z1_all, d2_all, wavelength_m, strict=True)
 
     a_fitd1 = t_valueM2d1[0]
     a_fitd2 = t_valueM2d2[0]

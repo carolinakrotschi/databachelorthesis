@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 
 # function to read the file
 def read_txt_data(file_path):
-    data = np.loadtxt(file_path, skiprows=1)
+    data = np.loadtxt(file_path, skiprows=0)
     z1_all = data[:, 0] * 1e-3
     d1_all = data[:, 1] * 1e-3 #my data is in mm
     d2_all = data[:, 2] * 1e-3
     return z1_all, d1_all, d2_all
 
 # Files paths
-file_path = r"/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msquared/rawdata/uniphase_1507p_v4.txt"
+file_path = r"/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msquared/rawdata/uniphase_1103p_1177761_v4.txt"
 file_path_save = r'/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msquared/results'
 
 # Calling function to read the file
