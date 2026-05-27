@@ -14,7 +14,7 @@ def read_txt_data(file_path):
     return z1_all, d1_all, d2_all
 
 # Files paths
-file_path = r"/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msquared/rawdata/uniphase_1103p_1177761_v4.txt"
+file_path = r"/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msquared/rawdata/uniphase_1122p_v4.txt"
 file_path_save = r'/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msquared/results'
 
 # Calling function to read the file
