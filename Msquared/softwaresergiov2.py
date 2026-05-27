@@ -16,7 +16,7 @@ RESULTS_DIR.mkdir(exist_ok=True)
 
 
 DATA_FILES = [
-    ("thorlabs_v4.txt", "thorlabs", 1576.293000),
+    ("thorlabs_v2.txt", "thorlabs", 1576.293000),
     ("uniphase_1023p_v4.txt", "uniphase1023p", 631.805000),
     ("uniphase_1103p_1177761_v4.txt", "uniphase1103p11777", 631.805000),
     ("uniphase_1103p_1180380_v4.txt", "uniphase1103p110838", 632.006000),
