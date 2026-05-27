@@ -1,0 +1,4 @@
+paste this into command window
+cd "/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/Studium/Bachelorarbeit/Lab/Messdaten/Msquared"
+source .venv312/bin/activate
+python softwaresergiov2.py

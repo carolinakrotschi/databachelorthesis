@@ -1,8 +1,7 @@
+#das ist nicht mehr aktuell
+
 M2 Messung welcher Absorptionfilter bei welchem laser für optimales Messergebnis
 rayc software
-
-
-
 
 Thorlabs\
 absorptive filter 1,2, 0.5
@@ -17,6 +16,9 @@ absorptive filter 1,1,1
 
 uniphase 1103p1180380 und uniphase 1103p 1177761 and uniphase 1122p
 absorptive filter 1,1,1,1
+
+Erklärung absoption filter: schwächt beam indem er Teil der Strahlung im Material absorbiert und in Wärme umwandelt
+Reflektionsfilter: lässt nur einen kleinen Teil durch und Reflektiert dden Rest
 
 
 
