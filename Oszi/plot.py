@@ -69,11 +69,11 @@ file_with = "withmovestage2.csv"
 df_without, stats_without = read_opm_file(file_without, sep=",")
 df_with, stats_with = read_opm_file(file_with, sep=",")
 
-print("WITHOUT MOVE STAGE:")
+print("Interferometer Signal without moving the stage:")
 print(df_without.columns)
 print(stats_without)
 
-print("\nWITH MOVE STAGE:")
+print("\nInterferometer Signal with moving the stage")
 print(df_with.columns)
 print(stats_with)
 
@@ -103,19 +103,19 @@ y_with_norm = (y_with - np.mean(y_with)) / np.std(y_with)
 
 # Plot
 fig, ax = plt.subplots(figsize=(12, 6))
-ax.plot(t_without, y_without_norm, label="Without moving stage", alpha=0.8)
-ax.plot(t_with, y_with_norm, label="With moving stage", alpha=0.8)
+ax.plot(t_without, y_without_norm, label="Interferometer Signal without moving the stage", alpha=0.8)
+ax.plot(t_with, y_with_norm, label="Interferometer Signal with moving the stage", alpha=0.8)
 
-ax.set_title("Interferometer Signal Comparison")
+ax.set_title("Oscilloscope Signal Comparison")
 ax.set_xlabel(time_col)
 ax.set_ylabel(signal_col + " (normiert)")
 ax.legend()
 ax.grid(True)
 
 stats_text = format_stats_side_by_side(
-    "WITHOUT MOVE STAGE",
+    "Interferometer Signal without moving the stage",
     stats_without,
-    "WITH MOVE STAGE",
+    "Interferometer Signal with moving the stage",
     stats_with,
 )
 
