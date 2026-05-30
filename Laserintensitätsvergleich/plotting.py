@@ -8,7 +8,7 @@ PLOT_DIR.mkdir(exist_ok=True)
 
 files = [
     "uniphase1502p.txt",
-    "thorlabslds5.txt",
+    "thorlabsCPS780S.txt",
     "uniphase023p.txt",
     "uniphase1103p1108380.txt",
     "uniphase1103p1177761.txt",

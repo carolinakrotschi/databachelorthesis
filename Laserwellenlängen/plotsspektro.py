@@ -18,8 +18,8 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 
 FILE_PAIRS = [
     (
-        "thorlabs_NQ51B22081__0__11-36-36-140.txt",
-        "backthorlabs_NQ51B22081__0__11-35-54-129-1.txt"
+        "thorlabsCPS780S_NQ51B22081__0__11-36-36-140.txt",
+        "backthorlabsCPS780S_NQ51B22081__0__11-35-54-129-1.txt"
     ),
     (
         "uniphase1023p_USB4C031521__0__12-07-47-856.txt",
