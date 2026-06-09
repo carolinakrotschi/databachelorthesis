@@ -1,17 +1,4 @@
-import os
-import sys
 from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent
-VENV_PYTHON = BASE_DIR / ".venv" / "bin" / "python"
-
-if VENV_PYTHON.exists() and Path(sys.prefix).resolve() != (BASE_DIR / ".venv").resolve():
-    os.execv(str(VENV_PYTHON), [str(VENV_PYTHON), str(Path(__file__).resolve()), *sys.argv[1:]])
-
-MPL_CONFIG_DIR = BASE_DIR / ".mplconfig"
-MPL_CONFIG_DIR.mkdir(exist_ok=True)
-os.environ.setdefault("MPLCONFIGDIR", str(MPL_CONFIG_DIR))
-
 import numpy as np
 import matplotlib
 
@@ -22,8 +9,8 @@ import matplotlib.pyplot as plt
 # FOLDERS
 # ============================================================
 
-DATA_DIR = BASE_DIR / "rawdata"
-OUTPUT_DIR = BASE_DIR / "results"
+DATA_DIR = Path(__file__).resolve().parent / "rawdata"
+OUTPUT_DIR = Path(__file__).resolve().parent / "results"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # ============================================================
