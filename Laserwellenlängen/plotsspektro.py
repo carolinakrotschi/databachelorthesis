@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 DATA_DIR = Path(__file__).resolve().parent / "rawdata"
 OUTPUT_DIR = Path(__file__).resolve().parent / "results"
 OUTPUT_DIR.mkdir(exist_ok=True)
+X_AXIS_START = 450
 
 # ============================================================
 # FILE PAIRS
@@ -171,6 +172,7 @@ for signal_file, background_file in FILE_PAIRS:
     plt.xlabel("Wavelength / nm")
     plt.ylabel("Intensity")
     plt.title(name)
+    plt.xlim(left=X_AXIS_START)
     plt.tight_layout()
 
     plt.savefig(OUTPUT_DIR / f"{name}.png", dpi=300)
@@ -200,6 +202,8 @@ for name, wavelengths, intensity in all_corrected_spectra:
 plt.xlabel("Wavelength / nm")
 plt.ylabel("Intensity")
 plt.title("All Corrected Laser Spectra")
+plt.xlim(left=X_AXIS_START)
+plt.xlim(right=1000)
 plt.legend(fontsize=8)
 plt.tight_layout()
 
