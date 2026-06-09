@@ -1,13 +1,29 @@
+import os
+import sys
 from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+VENV_PYTHON = BASE_DIR / ".venv" / "bin" / "python"
+
+if VENV_PYTHON.exists() and Path(sys.prefix).resolve() != (BASE_DIR / ".venv").resolve():
+    os.execv(str(VENV_PYTHON), [str(VENV_PYTHON), str(Path(__file__).resolve()), *sys.argv[1:]])
+
+MPL_CONFIG_DIR = BASE_DIR / ".mplconfig"
+MPL_CONFIG_DIR.mkdir(exist_ok=True)
+os.environ.setdefault("MPLCONFIGDIR", str(MPL_CONFIG_DIR))
+
 import numpy as np
+import matplotlib
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 # ============================================================
 # FOLDERS
 # ============================================================
 
-DATA_DIR = Path("rawdata")
-OUTPUT_DIR = Path("results")
+DATA_DIR = BASE_DIR / "rawdata"
+OUTPUT_DIR = BASE_DIR / "results"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # ============================================================
@@ -18,8 +34,8 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 
 FILE_PAIRS = [
     (
-        "thorlabsCPS780S_NQ51B22081__0__11-36-36-140.txt",
-        "backthorlabsCPS780S_NQ51B22081__0__11-35-54-129-1.txt"
+        "thorlabsCPS780S_2_NQ51B22081__0__11-36-36-140.txt",
+        "backthorlabsCPS780S_2_NQ51B22081__0__11-35-54-129-1.txt"
     ),
     (
         "uniphase1023p_USB4C031521__0__12-07-47-856.txt",
@@ -79,6 +95,21 @@ def short_name(file_name):
     return Path(file_name).stem.split("_")[0]
 
 
+def spectrum_path(file_name):
+    path = DATA_DIR / file_name
+
+    if path.exists():
+        return path
+
+    extra_txt_path = DATA_DIR / f"{file_name}.txt"
+
+    if extra_txt_path.exists():
+        print(f"Using existing file with extra .txt extension: {extra_txt_path.name}")
+        return extra_txt_path
+
+    return path
+
+
 # ============================================================
 # PROCESS DATA
 # ============================================================
@@ -89,8 +120,8 @@ all_corrected_spectra = []
 for signal_file, background_file in FILE_PAIRS:
     name = short_name(signal_file)
 
-    signal_path = DATA_DIR / signal_file
-    background_path = DATA_DIR / background_file
+    signal_path = spectrum_path(signal_file)
+    background_path = spectrum_path(background_file)
 
     print(f"\nProcessing: {name}")
     print(f"Signal file: {signal_path}")
@@ -186,7 +217,7 @@ plt.legend(fontsize=8)
 plt.tight_layout()
 
 plt.savefig(OUTPUT_DIR / "all_corrected_lasers.png", dpi=300)
-plt.show()
+plt.close()
 
 print("\nFinished.")
 print(f"Results saved in: {OUTPUT_DIR.resolve()}")

@@ -1,5 +1,5 @@
 Laser	Peak_Wavelength_nm
-thorlabsCPS780S	1576.293000
+thorlabsCPS780S	787.324000
 uniphase1023p	631.805000
 uniphase1103p11777	631.805000
 uniphase1103p110838	632.006000
