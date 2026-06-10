@@ -1,14 +1,20 @@
+import os
 from pathlib import Path
+from tempfile import gettempdir
+
+BASE_DIR = Path(__file__).resolve().parent
+MPLCONFIG_DIR = Path(os.environ.get("MPLCONFIGDIR", Path(gettempdir()) / "msquared-matplotlib"))
+MPLCONFIG_DIR.mkdir(parents=True, exist_ok=True)
+os.environ["MPLCONFIGDIR"] = str(MPLCONFIG_DIR)
+
 import numpy as np
 import laserbeamsize as lbs
+import matplotlib
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
-
-BASE_DIR = Path(
-    "/Users/carolinakrotsch/Library/Mobile Documents/com~apple~CloudDocs/"
-    "Studium/Bachelorarbeit/Lab/Messdaten/Msquared"
-)
 
 DATA_DIR = BASE_DIR / "rawdata"
 RESULTS_DIR = BASE_DIR / "results"
@@ -16,7 +22,7 @@ RESULTS_DIR.mkdir(exist_ok=True)
 
 
 DATA_FILES = [
-    ("thorlabs_v2.txt", "thorlabs", 1576.293000),
+    ("thorlabs_v2.txt", "thorlabs", 787.324),
     ("uniphase_1023p_v4.txt", "uniphase1023p", 631.805000),
     ("uniphase_1103p_1177761_v4.txt", "uniphase1103p11777", 631.805000),
     ("uniphase_1103p_1180380_v4.txt", "uniphase1103p110838", 632.006000),
