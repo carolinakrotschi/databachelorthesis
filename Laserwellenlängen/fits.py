@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 
 pairs = [
     ("thorlabsCPS780S_2_NQ51B22081__0__11-36-36-140.txt", "backthorlabsCPS780S_2_NQ51B22081__0__11-35-54-129-1.txt"),
-    ("uniphase1023p_USB4C031521__0__12-07-47-856.txt", "backuniphase1023p_USB4C031521__3__12-07-31-183.txt"),
+    ("uniphase1023p_2_USB4C031521__0__12-07-47-856.txt", "backuniphase1023p_USB4C031521__3__12-07-31-183.txt"),
     ("uniphase1103p11777_USB4C031521__0__12-13-38-733.txt", "backuniphase1103p11777_USB4C031521__0__12-12-07-080.txt"),
     ("uniphase1103p110838_USB4C031521__0__16-10-06-126.txt", "backuniphase1103p110838_USB4C031521__0__16-09-42-795.txt"),
     ("uniphase1122p_USB4C031521__0__16-13-14-685.txt", "backuniphase1122p_USB4C031521__0__16-12-54-022.txt"),
