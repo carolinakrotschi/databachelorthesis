@@ -20,7 +20,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
-DEFAULT_FILE = "uniphase1507p_2_USB4C031521__0__12-07-47-856"
+DEFAULT_FILE = "uniphase1507p_3_USB4C031521__0__12-07-47-856"
 
 
 def load_spectrum(file_path: Path) -> tuple[np.ndarray, np.ndarray]:
