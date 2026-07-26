@@ -68,8 +68,8 @@ for label, filename in measurements:
     plot_label = f"{label} (SNR={snr:.2f})"
     plt.plot(time, signal, label=plot_label)
 
-plt.xlabel("Time (s)")
-plt.ylabel("Signal (W)")
+plt.xlabel("Time [s]")
+plt.ylabel("Signal [W]")
 plt.title("Thorlabs CPS780S Comparison")
 plt.grid(True)
 plt.legend()

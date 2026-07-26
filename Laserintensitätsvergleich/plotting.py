@@ -13,12 +13,15 @@ import matplotlib.pyplot as plt
 DATA_DIR = SCRIPT_DIR / "rawdata"
 PLOT_DIR = SCRIPT_DIR / "Plots"
 PLOT_DIR.mkdir(exist_ok=True)
+THESIS_LABEL_SIZE = 18
+THESIS_TICK_SIZE = 18
+THESIS_LEGEND_SIZE = 18
 
 measurements = [
     ("uniphase1507p", "uniphase1507p_2.txt"),
     ("thorlabsCPS780S", "thorlabsCPS780S.txt"),
     ("uniphase023p", "uniphase023p.txt"),
-    ("uniphase1103p1180380", "uniphase1103p1180380_2.txt"),
+    ("uniphase1103p1108380", "uniphase1103p1180380_2.txt"),
     ("uniphase1103p1177761", "uniphase1103p11177761_2.txt"),
     ("uniphase1122p", "uniphase1122p_2.txt")
 ]
@@ -67,8 +70,8 @@ for name, filename in measurements:
     # Individual plot
     plt_individual = plt.figure(figsize=(10, 5))
     plt.plot(time, signal)
-    plt.xlabel("Time (s)")
-    plt.ylabel("Signal (W)")
+    plt.xlabel("Time [s]")
+    plt.ylabel("Signal [W]")
     plt.title(name)
     plt.grid(True)
     plt.tight_layout()
@@ -82,13 +85,18 @@ for name, filename in measurements:
 
 # Comparison plot
 plt.figure(1)
-plt.xlabel("Time (s)")
-plt.ylabel("Signal (W)")
-plt.title("Comparison of All Measurements")
+plt.xlabel("Time [s]", fontsize=THESIS_LABEL_SIZE)
+plt.ylabel("Signal [W]", fontsize=THESIS_LABEL_SIZE)
+plt.tick_params(axis="both", labelsize=THESIS_TICK_SIZE)
 plt.grid(True)
-plt.legend()
+plt.legend(
+    fontsize=THESIS_LEGEND_SIZE,
+    loc="upper left",
+    bbox_to_anchor=(1.02, 1.0),
+    borderaxespad=0.0,
+)
 plt.tight_layout()
-plt.savefig(PLOT_DIR / "comparison_all_measurements.png", dpi=300)
+plt.savefig(PLOT_DIR / "intensitycomparison.png", dpi=300, bbox_inches="tight")
 plt.close()
 
 # Write SNR results to text file

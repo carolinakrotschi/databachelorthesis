@@ -146,7 +146,7 @@ def plot_fit(
         bbox={"facecolor": "white", "alpha": 0.7, "edgecolor": "none"},
     )
     plt.xlim(peak - 2.0, peak + 2.0)
-    plt.xlabel("Wavelength / nm")
+    plt.xlabel("Wavelength [nm]")
     plt.ylabel("Intensity")
     plt.title(title)
     plt.legend()

@@ -13,6 +13,11 @@ DATA_DIR = Path(__file__).resolve().parent / "rawdata"
 OUTPUT_DIR = Path(__file__).resolve().parent / "results"
 OUTPUT_DIR.mkdir(exist_ok=True)
 X_AXIS_START = 450
+THESIS_X_MIN = 600
+THESIS_X_MAX = 800
+THESIS_LABEL_SIZE = 18
+THESIS_TICK_SIZE = 18
+THESIS_LEGEND_SIZE = 18
 
 # ============================================================
 # FILE PAIRS
@@ -169,7 +174,7 @@ for signal_file, background_file in FILE_PAIRS:
         verticalalignment="center"
     )
 
-    plt.xlabel("Wavelength / nm")
+    plt.xlabel("Wavelength [nm]")
     plt.ylabel("Intensity")
     plt.title(name)
     plt.xlim(left=X_AXIS_START)
@@ -194,21 +199,55 @@ with open(OUTPUT_DIR / "laser_peak_wavelengths.txt", "w", encoding="utf-8") as f
 # COMBINED PLOT
 # ============================================================
 
-plt.figure(figsize=(12, 7))
+fig, (ax_left, ax_right) = plt.subplots(
+    1,
+    2,
+    figsize=(12, 7),
+    sharey=True,
+    gridspec_kw={"width_ratios": [1.15, 0.85], "wspace": 0.05},
+)
 
 for name, wavelengths, intensity in all_corrected_spectra:
-    plt.plot(wavelengths, intensity, label=name)
+    if name == "uniphase1103p11777" or name == "uniphase1103p1177761":
+        continue
 
-plt.xlabel("Wavelength / nm")
-plt.ylabel("Intensity")
-plt.title("All Corrected Laser Spectra")
-plt.xlim(left=X_AXIS_START)
-plt.xlim(right=1000)
-plt.legend(fontsize=8)
-plt.tight_layout()
+    label = "uniphase1023p & uniphase1103p1177761" if name == "uniphase1023p" else ("uniphase1103p1108380" if name == "uniphase1103p110838" else name)
+    ax_left.plot(wavelengths, intensity, label=label)
+    ax_right.plot(wavelengths, intensity, label=label)
 
-plt.savefig(OUTPUT_DIR / "all_corrected_lasers.png", dpi=300)
-plt.close()
+ax_left.set_xlim(THESIS_X_MIN, 650)
+ax_right.set_xlim(775, THESIS_X_MAX)
+
+ax_left.set_ylabel("Intensity", fontsize=THESIS_LABEL_SIZE)
+
+ax_left.tick_params(axis="both", labelsize=THESIS_TICK_SIZE)
+ax_right.tick_params(axis="both", labelsize=THESIS_TICK_SIZE)
+ax_right.tick_params(axis="y", left=False, right=False, labelleft=False, labelright=False)
+
+ax_left.spines["right"].set_visible(False)
+ax_right.spines["left"].set_visible(False)
+
+d = 0.015
+break_kwargs = dict(color="black", clip_on=False, linewidth=1.5)
+ax_left.plot((1 - d, 1 + d), (-d, +d), transform=ax_left.transAxes, **break_kwargs)
+ax_left.plot((1 - d, 1 + d), (1 - d, 1 + d), transform=ax_left.transAxes, **break_kwargs)
+ax_right.plot((-d, +d), (-d, +d), transform=ax_right.transAxes, **break_kwargs)
+ax_right.plot((-d, +d), (1 - d, 1 + d), transform=ax_right.transAxes, **break_kwargs)
+
+ax_left.set_xticks([600, 610, 620, 630, 640])
+ax_right.set_xticks([780, 785, 790, 795, 800])
+
+ax_right.legend(
+    fontsize=THESIS_LEGEND_SIZE,
+    loc="upper left",
+    bbox_to_anchor=(1.02, 1.0),
+    borderaxespad=0.0,
+)
+fig.supxlabel("Wavelength [nm]", fontsize=THESIS_LABEL_SIZE)
+fig.tight_layout()
+
+fig.savefig(OUTPUT_DIR / "all_corrected_lasers.png", dpi=300, bbox_inches="tight")
+plt.close(fig)
 
 print("\nFinished.")
 print(f"Results saved in: {OUTPUT_DIR.resolve()}")
