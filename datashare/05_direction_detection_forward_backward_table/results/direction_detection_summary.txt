@@ -1,0 +1,8 @@
+| File                  | forward   | backward  | still |
+
+| Measurement direction backward #1     |  25.33% |  37.83% |  36.84% |
+| Measurement direction backward #2     |  17.92% |  22.09% |  60.00% |
+| Measurement direction backward #3     |  37.43% |  49.67% |  12.90% |
+| Measurement direction forward #1      |  16.26% |  13.47% |  70.28% |
+| Measurement direction forward #2      |  47.18% |  27.83% |  24.99% |
+| Measurement direction forward #3      |  57.62% |  34.89% |   7.49% |

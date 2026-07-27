@@ -196,58 +196,76 @@ with open(OUTPUT_DIR / "laser_peak_wavelengths.txt", "w", encoding="utf-8") as f
 
 
 # ============================================================
-# COMBINED PLOT
+# ============================================================
+# COMBINED PLOTS
 # ============================================================
 
-fig, (ax_left, ax_right) = plt.subplots(
-    1,
-    2,
-    figsize=(12, 7),
-    sharey=True,
-    gridspec_kw={"width_ratios": [1.15, 0.85], "wspace": 0.05},
-)
+def make_combined_plot(output_filename, combine_uniphase=True):
+    fig, (ax_left, ax_right) = plt.subplots(
+        1,
+        2,
+        figsize=(12, 7),
+        sharey=True,
+        gridspec_kw={"width_ratios": [15, 18], "wspace": 0.06},
+    )
 
-for name, wavelengths, intensity in all_corrected_spectra:
-    if name == "uniphase1103p11777" or name == "uniphase1103p1177761":
-        continue
+    for name, wavelengths, intensity in all_corrected_spectra:
+        if combine_uniphase:
+            if name == "uniphase1103p11777" or name == "uniphase1103p1177761":
+                continue
+            label = (
+                "uniphase1023p & uniphase1103p1177761"
+                if name == "uniphase1023p"
+                else ("uniphase1103p1108380" if name == "uniphase1103p110838" else name)
+            )
+        else:
+            if name == "uniphase1103p11777":
+                label = "uniphase1103p1177761"
+            elif name == "uniphase1103p110838":
+                label = "uniphase1103p1108380"
+            else:
+                label = name
 
-    label = "uniphase1023p & uniphase1103p1177761" if name == "uniphase1023p" else ("uniphase1103p1108380" if name == "uniphase1103p110838" else name)
-    ax_left.plot(wavelengths, intensity, label=label)
-    ax_right.plot(wavelengths, intensity, label=label)
+        ax_left.plot(wavelengths, intensity, label=label)
+        ax_right.plot(wavelengths, intensity, label=label)
 
-ax_left.set_xlim(THESIS_X_MIN, 650)
-ax_right.set_xlim(775, THESIS_X_MAX)
+    ax_left.set_xlim(625, 640)
+    ax_right.set_xlim(780, 798)
 
-ax_left.set_ylabel("Intensity", fontsize=THESIS_LABEL_SIZE)
+    ax_left.set_ylabel("Intensity", fontsize=THESIS_LABEL_SIZE)
 
-ax_left.tick_params(axis="both", labelsize=THESIS_TICK_SIZE)
-ax_right.tick_params(axis="both", labelsize=THESIS_TICK_SIZE)
-ax_right.tick_params(axis="y", left=False, right=False, labelleft=False, labelright=False)
+    ax_left.tick_params(axis="both", labelsize=THESIS_TICK_SIZE)
+    ax_right.tick_params(axis="both", labelsize=THESIS_TICK_SIZE)
+    ax_right.tick_params(axis="y", left=False, right=False, labelleft=False, labelright=False)
 
-ax_left.spines["right"].set_visible(False)
-ax_right.spines["left"].set_visible(False)
+    ax_left.spines["right"].set_visible(False)
+    ax_right.spines["left"].set_visible(False)
 
-d = 0.015
-break_kwargs = dict(color="black", clip_on=False, linewidth=1.5)
-ax_left.plot((1 - d, 1 + d), (-d, +d), transform=ax_left.transAxes, **break_kwargs)
-ax_left.plot((1 - d, 1 + d), (1 - d, 1 + d), transform=ax_left.transAxes, **break_kwargs)
-ax_right.plot((-d, +d), (-d, +d), transform=ax_right.transAxes, **break_kwargs)
-ax_right.plot((-d, +d), (1 - d, 1 + d), transform=ax_right.transAxes, **break_kwargs)
+    d = 0.015
+    break_kwargs = dict(color="black", clip_on=False, linewidth=1.5)
+    ax_left.plot((1 - d, 1 + d), (-d, +d), transform=ax_left.transAxes, **break_kwargs)
+    ax_left.plot((1 - d, 1 + d), (1 - d, 1 + d), transform=ax_left.transAxes, **break_kwargs)
+    ax_right.plot((-d, +d), (-d, +d), transform=ax_right.transAxes, **break_kwargs)
+    ax_right.plot((-d, +d), (1 - d, 1 + d), transform=ax_right.transAxes, **break_kwargs)
 
-ax_left.set_xticks([600, 610, 620, 630, 640])
-ax_right.set_xticks([780, 785, 790, 795, 800])
+    ax_left.set_xticks([625, 630, 635])
+    ax_right.set_xticks([780, 785, 790, 795])
 
-ax_right.legend(
-    fontsize=THESIS_LEGEND_SIZE,
-    loc="upper left",
-    bbox_to_anchor=(1.02, 1.0),
-    borderaxespad=0.0,
-)
-fig.supxlabel("Wavelength [nm]", fontsize=THESIS_LABEL_SIZE)
-fig.tight_layout()
+    ax_right.legend(
+        fontsize=THESIS_LEGEND_SIZE,
+        loc="upper left",
+        bbox_to_anchor=(1.02, 1.0),
+        borderaxespad=0.0,
+    )
+    fig.supxlabel("Wavelength [nm]", fontsize=THESIS_LABEL_SIZE)
+    fig.tight_layout()
 
-fig.savefig(OUTPUT_DIR / "all_corrected_lasers.png", dpi=300, bbox_inches="tight")
-plt.close(fig)
+    fig.savefig(OUTPUT_DIR / output_filename, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
+make_combined_plot("all_corrected_lasers.png", combine_uniphase=True)
+make_combined_plot("all_corrected_lasers_separate.png", combine_uniphase=False)
 
 print("\nFinished.")
 print(f"Results saved in: {OUTPUT_DIR.resolve()}")

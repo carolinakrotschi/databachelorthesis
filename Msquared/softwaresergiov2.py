@@ -184,6 +184,9 @@ def analyze_file(file_path, laser_name, wavelength_nm):
         "waist_d2_m": v_dnewd2,
         "z0_d1_m": v_znewd1,
         "z0_d2_m": v_znewd2,
+        "z_data": z1_all,
+        "d1_data": d1_all,
+        "d2_data": d2_all,
         "z_fit": a_z1new,
         "d1_fit": a_d1newlong,
         "d2_fit": a_d2newlong,
@@ -346,7 +349,9 @@ if summary_results:
         color = colors(idx % 10)
         z_fit_d1 = r["z_fit"] - r["z0_d1_m"]
         z_fit_d2 = r["z_fit"] - r["z0_d2_m"]
-        centered_z_sets.extend([z_fit_d1, z_fit_d2])
+        z_data_d1 = r["z_data"] - r["z0_d1_m"]
+        z_data_d2 = r["z_data"] - r["z0_d2_m"]
+        centered_z_sets.extend([z_fit_d1, z_fit_d2, z_data_d1, z_data_d2])
 
         plt.plot(
             z_fit_d1,
@@ -363,6 +368,25 @@ if summary_results:
             linewidth=2,
             linestyle="--",
             label=f"{r['laser']} d2, M2 = {r['M2_d2']:.2f}",
+        )
+
+        plt.scatter(
+            z_data_d1,
+            r["d1_data"],
+            color=color,
+            marker="o",
+            s=18,
+            alpha=0.75,
+            zorder=3,
+        )
+        plt.scatter(
+            z_data_d2,
+            r["d2_data"],
+            color=color,
+            marker="s",
+            s=18,
+            alpha=0.75,
+            zorder=3,
         )
 
     plt.xlabel("z position [m]", fontsize=THESIS_LABEL_SIZE)

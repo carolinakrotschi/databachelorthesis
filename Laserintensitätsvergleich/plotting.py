@@ -54,7 +54,7 @@ for name, filename in measurements:
                     pass
 
     time = np.array(time)
-    signal = np.array(signal)
+    signal = np.array(signal) * 1e3  # Convert W to mW
 
     if len(time) == 0 or len(signal) == 0:
         print(f"No measurement data found: {file_path}")
@@ -71,7 +71,7 @@ for name, filename in measurements:
     plt_individual = plt.figure(figsize=(10, 5))
     plt.plot(time, signal)
     plt.xlabel("Time [s]")
-    plt.ylabel("Signal [W]")
+    plt.ylabel("Signal [mW]")
     plt.title(name)
     plt.grid(True)
     plt.tight_layout()
@@ -86,7 +86,7 @@ for name, filename in measurements:
 # Comparison plot
 plt.figure(1)
 plt.xlabel("Time [s]", fontsize=THESIS_LABEL_SIZE)
-plt.ylabel("Signal [W]", fontsize=THESIS_LABEL_SIZE)
+plt.ylabel("Signal [mW]", fontsize=THESIS_LABEL_SIZE)
 plt.tick_params(axis="both", labelsize=THESIS_TICK_SIZE)
 plt.grid(True)
 plt.legend(
@@ -101,7 +101,7 @@ plt.close()
 
 # Write SNR results to text file
 with open(PLOT_DIR / "snr_results.txt", "w") as f:
-    f.write("Measurement\tFile\tMean_Signal_W\tStd_Dev_W\tSNR\tSNR_dB\n")
+    f.write("Measurement\tFile\tMean_Signal_mW\tStd_Dev_mW\tSNR\tSNR_dB\n")
 
     for r in results:
         f.write(

@@ -188,6 +188,16 @@ def main():
     fit2d = design @ coeffs2
     xd = td + t_abs[0]
 
+    # Remove linear trend (m*t) from both raw data and fit lines
+    m1 = coeffs1[2]
+    m2 = coeffs2[2]
+
+    y1_plot = y1 - m1 * t
+    y2_plot = y2 - m2 * t
+
+    fit1d_plot = fit1d - m1 * td
+    fit2d_plot = fit2d - m2 * td
+
     plt.rcParams.update({
         'font.size': 18,
         'axes.labelsize': 18,
@@ -199,9 +209,9 @@ def main():
 
     fig, axes = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
 
-    axes[0].plot(t_abs, y1, "-", linewidth=1.0, alpha=0.45, label="Raw S1 line")
-    axes[0].plot(t_abs, y1, ".", ms=3, label="Raw S1 points")
-    axes[0].plot(xd, fit1d, linewidth=2.2, color="#d62728", label="Sinus-Fit")
+    axes[0].plot(t_abs, y1_plot, "-", linewidth=1.0, alpha=0.45, label="Raw S1 line")
+    axes[0].plot(t_abs, y1_plot, ".", ms=3, label="Raw S1 points")
+    axes[0].plot(xd, fit1d_plot, linewidth=2.2, color="#d62728", label="Sinus-Fit")
     axes[0].set_ylabel("S1 [V]")
     axes[0].grid(True, alpha=0.3)
     axes[0].legend()
@@ -209,9 +219,9 @@ def main():
         f"Gemeinsamer Fit: f = {f:.5f} Hz, T = {period:.5f} s"
     )
 
-    axes[1].plot(t_abs, y2, "-", linewidth=1.0, alpha=0.45, label="Raw S2 line")
-    axes[1].plot(t_abs, y2, ".", ms=3, label="Raw S2 points")
-    axes[1].plot(xd, fit2d, linewidth=2.2, color="#d62728", label="Cosinus-Fit")
+    axes[1].plot(t_abs, y2_plot, "-", linewidth=1.0, alpha=0.45, label="Raw S2 line")
+    axes[1].plot(t_abs, y2_plot, ".", ms=3, label="Raw S2 points")
+    axes[1].plot(xd, fit2d_plot, linewidth=2.2, color="#d62728", label="Cosinus-Fit")
     axes[1].set_xlabel("Relative Time [s]")
     axes[1].set_ylabel("S2 [V]")
     axes[1].grid(True, alpha=0.3)
