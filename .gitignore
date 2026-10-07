@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv*/
+
+# Matplotlib caches
+.mplconfig/
+.matplotlib-cache/
+
+# Editors and OS files
+.vscode/
+.DS_Store
